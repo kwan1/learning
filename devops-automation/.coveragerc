@@ -1,0 +1,12 @@
+[run]
+# Measure code coverage
+source = devops_tool
+omit = 
+    */tests/*
+    */__pycache__/*
+    */venv/*
+
+[report]
+# Show missing lines in coverage report
+show_missing = True
+precision = 2

@@ -1,0 +1,17 @@
+# retain-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: retain-pods
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "echo 'important data' > /data/test.txt && sleep 3600"]
+      volumeMounts:
+        - name: storage
+          mountPath: /data
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: retain-pvc

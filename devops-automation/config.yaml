@@ -1,0 +1,13 @@
+# DevOps Tool Configuration
+app:
+  name: "devops-tool"
+  version: "0.1.0"
+
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/devops_tool.log"
+
+paths:
+  workdir: "."
+  output: "output"
