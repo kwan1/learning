@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"memory-hog","namespace":"production"},"spec":{"containers":[{"args":["--vm","1","--vm-bytes","150M","--vm-hang","1"],"command":["stress"],"image":"polinux/stress","name":"memory-hog","resources":{"limits":{"memory":"50Mi"},"requests":{"memory":"25Mi"}}}]}}
+  creationTimestamp: "2026-05-20T07:13:50Z"
+  generation: 1
+  name: memory-hog
+  namespace: production
+  resourceVersion: "556599"
+  uid: a258e869-4b3b-4aa9-9774-d0cced1589a1
+spec:
+  containers:
+  - args:
+    - --vm
+    - "1"
+    - --vm-bytes
+    - 150M
+    - --vm-hang
+    - "1"
+    command:
+    - stress
+    image: polinux/stress
+    imagePullPolicy: Always
+    name: memory-hog
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        memory: 25Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-qtkjc
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: orbstack
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-qtkjc
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2026-05-20T07:13:56Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2026-05-20T07:13:50Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2026-05-20T07:13:50Z"
+    message: 'containers with unready status: [memory-hog]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2026-05-20T07:13:50Z"
+    message: 'containers with unready status: [memory-hog]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2026-05-20T07:13:50Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - allocatedResources:
+      memory: 25Mi
+    containerID: docker://f34aea88934b6a710ded8299ee61817b94274f28323af8311912c1da265c4166
+    image: polinux/stress:latest
+    imageID: docker-pullable://polinux/stress@sha256:b6144f84f9c15dac80deb48d3a646b55c7043ab1d83ea0a697c09097aaad21aa
+    lastState:
+      terminated:
+        containerID: docker://f34aea88934b6a710ded8299ee61817b94274f28323af8311912c1da265c4166
+        exitCode: 1
+        finishedAt: "2026-05-20T07:17:24Z"
+        reason: OOMKilled
+        startedAt: "2026-05-20T07:17:24Z"
+    name: memory-hog
+    ready: false
+    resources:
+      limits:
+        memory: 50Mi
+      requests:
+        memory: 25Mi
+    restartCount: 5
+    started: false
+    state:
+      waiting:
+        message: back-off 2m40s restarting failed container=memory-hog pod=memory-hog_production(a258e869-4b3b-4aa9-9774-d0cced1589a1)
+        reason: CrashLoopBackOff
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-qtkjc
+      readOnly: true
+      recursiveReadOnly: Disabled
+  hostIP: 192.168.139.2
+  hostIPs:
+  - ip: 192.168.139.2
+  - ip: fd07:b51a:cc66::2
+  phase: Running
+  podIP: 192.168.194.76
+  podIPs:
+  - ip: 192.168.194.76
+  - ip: fd07:b51a:cc66:a::146
+  qosClass: Burstable
+  startTime: "2026-05-20T07:13:50Z"
