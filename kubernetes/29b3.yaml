@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logger
+  namespace: logging
+spec:
+  containers:
+    - name: myfrontend
+      image: busybox
+      command:
+        - sleep
+        - "3600"
+      volumeMounts:
+      - name: logger
+        mountPath: /var/log/app
+  volumes:
+    - name: logger
+      persistentVolumeClaim:
+        claimName: logs-pvc

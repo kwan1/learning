@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  rules:
+  - host: web.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: web-nodeport
+            port:
+              number: 80
+        path: /
+        pathType: Exact
+status:
+  loadBalancer: {} #kubectl create ingress web-ingress --rule="web.example.com/=web-nodeport:80" --dry-run=client -o yaml > 22.yaml

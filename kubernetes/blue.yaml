@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: team-blue
+  labels:
+    app: blue-app
+  name: blue-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: blue-app
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: blue-app
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+status: {} #kubectl create role dev-sam --verb=get,list,watch --resource=pods,deployments --namespace=team-blue (create role for namespace team blue)
+# kubectl create rolebinding dev-sam-building --role=dev-sam --user=dev-sam --namespace=team-blue (create role binding)
+# kubectl get pods --as=dev-sam --namespace=team-blue (to test)
+# kubectl delete pods <pod name> --as=dev-sam --namespace=team-blue
