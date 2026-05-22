@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: api-server
+  namespace: backend
+spec:
+  containers:
+    - name: api-server-container
+      image: nginx:alpine
+  nodeSelector:
+    tier: backend
+  tolerations:
+  - key: "node.kubernetes.io/not-ready"
+    operator: "Exists"
+    effect: NoExecute
+    tolerationSeconds: 0
