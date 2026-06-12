@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: logs-pv
+  namespace: logging2
+spec:
+  storageClassName: manual
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 2Gi
+  hostPath:
+    path: /mnt/logs
+  accessModes:
+    - ReadWriteOnce

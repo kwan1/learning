@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: logs-pod
+  namespace: logging2
+spec:
+  containers:
+  - name: logs-pod
+    image: busybox
+    volumeMounts:
+    - mountPath: /var/logs
+      name: logs-storage
+    command: ['sleep','3600']
+  volumes:
+    - name: logs-storage
+      persistentVolumeClaim:
+        claimName: logs-pvc
