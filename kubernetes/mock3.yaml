@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mock-cron
+  namespace: mock
+spec:
+  jobTemplate:
+    metadata:
+      name: mock-cron
+    spec:
+      successfulJobHistoryLimit: 1
+      failedJobsHistoryLimit: 1
+      template:
+        metadata: {}
+        spec:
+          containers:
+          - image: busybox
+            name: mock-cron
+            resources: {}
+            command: 
+          - /bin/sh
+          - -c
+          - date: echo hello
+          restartPolicy: OnFailure
+  schedule: '*/10 * * * *'
+status: {}

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mock-pv
+spec:
+  storageClassName: mock-sc
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 500Mi
+  hostPath:
+    path: /mnt/mockdata
+  accessModes:
+    - ReadWriteOnce
