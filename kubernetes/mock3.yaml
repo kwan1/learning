@@ -4,23 +4,19 @@ metadata:
   name: mock-cron
   namespace: mock
 spec:
+  schedule: '*/10 * * * *'
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
   jobTemplate:
-    metadata:
-      name: mock-cron
     spec:
-      successfulJobHistoryLimit: 1
-      failedJobsHistoryLimit: 1
       template:
-        metadata: {}
         spec:
           containers:
           - image: busybox
             name: mock-cron
             resources: {}
-            command: 
-          - /bin/sh
-          - -c
-          - date: echo hello
+            command:
+            - echo
+            - hello
           restartPolicy: OnFailure
-  schedule: '*/10 * * * *'
 status: {}
