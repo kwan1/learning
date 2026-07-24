@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mock-api-pod
+  namespace: mock
+spec:
+  containers:
+  - name: mock-api-container
+    image: nginx
+    env:
+    - name: API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: mock-api-secret
+          key: api_key

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exam-multi
+  namespace: exam
+spec:
+  containers:
+    - name: app
+      image: busybox
+      command: ["sh", "-c", "while true; do echo 'app running'; sleep 5; done"]
+    - name: sidecar
+      image: busybox
+      command: ["sh", "-c", "while true; do echo 'sidecar log line'; sleep 5; done"]

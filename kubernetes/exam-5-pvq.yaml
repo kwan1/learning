@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exam-storage-pod
+  namespace: exam
+spec:
+  containers:
+  - name: logs-pod
+    image: nginx
+    volumeMounts:
+    - mountPath: /data
+      name: exam-logs-storage
+  volumes:
+    - name: exam-logs-storage-vol
+      persistentVolumeClaim:
+        claimName: exam-pvc

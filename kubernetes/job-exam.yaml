@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: exam-job
+  namespace: exam
+spec:
+  completions: 1
+  backoffLimit: 3
+  template:
+    metadata: {}
+    spec:
+      containers:
+      - name: exam-job
+        image: busybox
+        command:
+          - echo
+          - "done"
+        resources: {}
+      restartPolicy: OnFailure

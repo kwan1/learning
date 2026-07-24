@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: exam-pod-1
+  name: exam-pod-1
+  namespace: exam
+spec:
+  containers:
+  - image: redis
+    name: exam-pod-1
+    resources:
+      requests:
+        memory: "100Mi"
+        cpu: "50m"
+      limits:
+        memory: "200Mi"
+        cpu: "250m"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
