@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mock-app-pod
+  namespace: mock
+spec:
+  containers:
+  - name: mock-app-container
+    image: nginx
+    env:
+    - name: LOG_LEVEL
+      valueFrom:
+        secretKeyRef:
+          name: mock-app-config
+          key: log_level

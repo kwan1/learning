@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: exam-net-pod
+  namespace: exam
+spec:
+  containers:
+    - name: exam-net-cont
+      image: nginx:1.25
+      ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
