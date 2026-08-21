@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ingress-demo-svc
+  name: ingress-demo-svc
+  namespace: exam
+spec:
+  ports:
+  - name: ingress-demo-port
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: ingress-demo
+  type: ClusterIP
+status:
+  loadBalancer: {}

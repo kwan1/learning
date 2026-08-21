@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: secure-app-policy
+  namespace: secure-zone
+spec:
+  podSelector:
+    matchLabels:
+      app: secure-app     # which pods THIS policy applies to
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          role: frontend
+    ports:
+    - protocol: TCP
+      port: 80
