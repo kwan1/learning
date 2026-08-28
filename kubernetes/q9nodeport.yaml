@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2026-08-27T03:53:57Z"
+  labels:
+    app: nodeport-demo-svc
+  name: nodeport-demo-svc
+  namespace: exam
+  resourceVersion: "2003315"
+  uid: 0adb984e-f0ba-4de9-9fb0-7d9ee548c809
+spec:
+  clusterIP: 192.168.194.169
+  clusterIPs:
+  - 192.168.194.169
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: 80-80
+    nodePort: 30080
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nodeport-demo
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
